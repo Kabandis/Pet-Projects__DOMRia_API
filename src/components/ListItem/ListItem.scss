@@ -1,0 +1,23 @@
+.list_item {
+    padding: 20px 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:black;
+    
+    & .item_photo {
+        height: 300px;
+    }
+    & .item_info {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        & .info_createdAt {
+            color: red;
+        }
+        & .info_footer {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

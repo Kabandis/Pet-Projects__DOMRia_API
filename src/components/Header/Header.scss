@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(19, 4, 88);
+    & .nav {
+        display: flex;
+        & .nav_item {
+            margin: 15px;
+        }
+        & .nav_link {
+            color: #fff;
+        }
+    }
+}

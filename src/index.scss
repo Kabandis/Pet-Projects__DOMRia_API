@@ -1,0 +1,16 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+@import "./styles/App.scss";
+
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+body, html, #root, .main {
+    height: 100%;
+    width: 100%;
+}

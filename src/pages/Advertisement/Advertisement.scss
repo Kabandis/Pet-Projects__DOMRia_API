@@ -1,0 +1,13 @@
+.advert_item {
+    padding: 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & .advert_title {
+        font-size: 20px;
+    }
+    & .advert_photos {
+        width: 500px;
+    }
+}
