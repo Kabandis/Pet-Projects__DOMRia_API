@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import axios from "axios"
 
 import {Tabs, Tab} from 'react-bootstrap'
 import Spinner from "react-bootstrap/Spinner"
 import ImageGallery from 'react-image-gallery'
+import { Context } from "../../contexts/Store"
 
 const Advertisement = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [response, setResponse] = useState(null)
-    
+    const context = useContext(Context)
+
     let images = []
 
     useEffect(() => {
@@ -27,6 +29,17 @@ const Advertisement = (props) => {
             imgResponse.map(item => images.push({original: `https://cdn.riastatic.com/photos/${item.file.slice(0, -4)}b.webp`, thumbnail: `https://cdn.riastatic.com/photos/${item.file.slice(0, -4)}b.webp`}))
         }
     }, [images, response])
+
+    const addToWishlist = itemsId => {
+        let arrFavouriteList = [...context.favouriteList]
+        if (arrFavouriteList.indexOf(itemsId) < 0) {
+            arrFavouriteList.push(itemsId)
+        }
+        else {
+            arrFavouriteList.splice(arrFavouriteList.indexOf(itemsId), 1)
+        }
+        context.changeFavouriteList(arrFavouriteList)
+    }
 
     return (
         <>
@@ -51,8 +64,11 @@ const Advertisement = (props) => {
                                 : ""
                             }
                         `}
-                        <button>
-                            В обране
+                        <button onClick={() => addToWishlist(parseInt(props.match.params.id))}>
+                            {context.favouriteList.indexOf(parseInt(props.match.params.id)) < 0 
+                                ? 'Додати в обрані' 
+                                : 'Видалити з обраних'
+                            }
                         </button>
                     </div>
                     <div className="advert_photos">
@@ -81,7 +97,7 @@ const Advertisement = (props) => {
                                 </p>
                                 <p>
                                     {response.price
-                                        ? `${response.price} грн` 
+                                        ? `${response.price} $` 
                                         : ""
                                     }
                                 </p>

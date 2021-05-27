@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import {Link} from "react-router-dom"
 
 import axios from "axios"
+import { Context } from "../../contexts/Store"
 
-const ListItem = ({itemsId, addToWishlist}) => {
+const ListItem = ({itemsId}) => {
     const [response, setResponse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const context = useContext(Context)
 
     useEffect(() => {
         setIsLoading(true)
@@ -16,6 +18,17 @@ const ListItem = ({itemsId, addToWishlist}) => {
         })}
         getResponse()
     }, [itemsId])
+
+    const addToWishlist = itemsId => {
+        let arrFavouriteList = [...context.favouriteList]
+        if (arrFavouriteList.indexOf(itemsId) < 0) {
+            arrFavouriteList.push(itemsId)
+        }
+        else {
+            arrFavouriteList.splice(arrFavouriteList.indexOf(itemsId), 1)
+        }
+        context.changeFavouriteList(arrFavouriteList)
+    }
 
     return (
         <>
@@ -71,10 +84,12 @@ const ListItem = ({itemsId, addToWishlist}) => {
                                     : <div>Дата не вказана</div>
                                 }
                             </div>
-                            <button onClick={() => addToWishlist()}>
-                                Add to favourite
+                            <button onClick={() => addToWishlist(itemsId)}>
+                                {context.favouriteList.indexOf(itemsId) < 0 
+                                    ? 'Додати в обрані' 
+                                    : 'Видалити з обраних'
+                                }
                             </button>
-                            
                         </div>
                     </div>
                 </div>

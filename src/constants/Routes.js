@@ -13,10 +13,6 @@ export default () => {
                 component={Home} 
                 exact
             />
-            {/* <Route 
-                path="/:id" 
-                render={Home}
-            /> */}
             <Route 
                 path="/wishlist" 
                 component={Wishlist}

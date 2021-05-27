@@ -72,7 +72,9 @@ const Home = () => {
                                         itemsId={item}
                                     />
                                 )
-                            }}
+                            }
+                            return null
+                            }
                         ) 
                     :   <Spinner animation="border" />
                 }
