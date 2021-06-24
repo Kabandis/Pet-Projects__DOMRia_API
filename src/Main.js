@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
-import Header from "./components/Header/Header"
-import Routes from "./constants/Routes"
+import Header from "./components/Header/Header";
+import Routes from "./Routes/Routes";
 
-import { Context } from "./contexts/Store"
-
+import { Context } from "./contexts/Store";
 
 const Main = () => {
-    const [initialContext, setInitialState] = useState({
-        favouriteList: []
-    })
+  const [initialContext, setInitialState] = useState({
+    favouriteList: [],
+  });
 
-    /* const addToWishlist = () => {
+  /* const addToWishlist = () => {
         setInitialState(context.favouriteList)
     } */
 
-    const changeFavouriteList = value => {
-        setInitialState({...initialContext, favouriteList: value})
-    }
+  const changeFavouriteList = (value) => {
+    setInitialState({ ...initialContext, favouriteList: value });
+  };
 
-    useEffect(() => {
-        console.log("ajsdaj", initialContext.favouriteList)
-    }, [initialContext.favouriteList])
+  useEffect(() => {
+    console.log("ajsdaj", initialContext.favouriteList);
+  }, [initialContext.favouriteList]);
 
-    return (
-        <Context.Provider value={{...initialContext, changeFavouriteList}} >
-            <div className="main">
-                <Header />
-                <Routes />
-            </div>
-        </Context.Provider>
-    )
-}
+  return (
+    <Context.Provider value={{ ...initialContext, changeFavouriteList }}>
+      <div className="main">
+        <Header />
+        <Routes />
+      </div>
+    </Context.Provider>
+  );
+};
 
-export default Main
+export default Main;
