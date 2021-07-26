@@ -26,12 +26,16 @@ const Wishlist = () => {
     getResponse();
   }, []);
 
+  useEffect(() => {
+    let wishlish = JSON.parse(localStorage.getItem("wishlist"))
+  }, [])
+
   return (
     <div>
       {!isLoading && resp && context.favouriteList.length > 0
         ? context.favouriteList.map((item, index) => {
             if (index >= 0 && index < 10) {
-              return <ListItem key={index} itemsId={item} />;
+              return <ListItem key={index} itemsId={item} /> && console.log("ww", wishlish);
             }
             return null;
           })

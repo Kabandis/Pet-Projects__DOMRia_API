@@ -24,12 +24,16 @@ const ListItem = ({ itemsId }) => {
     getResponse();
   }, [itemsId]);
 
-  const addToWishlist = (itemsId) => {
+  const toggleWishlist = (itemsId) => {
     let arrFavouriteList = [...context.favouriteList];
     if (arrFavouriteList.indexOf(itemsId) < 0) {
       arrFavouriteList.push(itemsId);
+      localStorage.setItem("wishlist", arrFavouriteList)
+      console.log("wishLost", localStorage)
     } else {
       arrFavouriteList.splice(arrFavouriteList.indexOf(itemsId), 1);
+      localStorage.removeItem("wishlist")
+      console.log("wishLost", localStorage)
     }
     context.changeFavouriteList(arrFavouriteList);
   };
@@ -81,7 +85,7 @@ const ListItem = ({ itemsId }) => {
                   <div>Дата не вказана</div>
                 )}
               </div>
-              <button onClick={() => addToWishlist(itemsId)}>
+              <button onClick={() => toggleWishlist(itemsId)}>
                 {context.favouriteList.indexOf(itemsId) < 0
                   ? "Додати в обрані"
                   : "Видалити з обраних"}
